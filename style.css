@@ -1,0 +1,448 @@
+```css
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.ciel {
+    width: 100vw;
+    height: 100vh;
+
+    background:
+    radial-gradient(circle at 75% 20%, rgba(80, 70, 150, 0.25), transparent 30%),
+    radial-gradient(circle at 20% 80%, rgba(40, 60, 130, 0.2), transparent 35%),
+    linear-gradient(to bottom, #02020d, #08082b, #11113d);
+
+    position: relative;
+
+    color: white;
+    text-align: center;
+	
+	touch-action: none;
+}
+
+.lune {
+    position: absolute;
+	
+	z-index: 100;
+
+    top: 50px;
+    right: 50px;
+
+    font-size: 60px;
+
+    cursor: pointer;
+
+    transition: transform 0.4s ease;
+
+    text-shadow:
+        0 0 15px rgba(255, 255, 255, 0.5),
+        0 0 35px rgba(180, 180, 255, 0.3);
+}
+
+.lune:hover {
+    transform: scale(1.15);
+
+    text-shadow:
+        0 0 20px white,
+        0 0 40px rgba(200, 200, 255, 0.8),
+        0 0 70px rgba(255, 200, 255, 0.5);
+}
+
+h1 {
+    margin: 0;
+    padding-top: 40vh;
+
+    font-size: 40px;
+}
+
+p {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+#etoiles {
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+}
+
+.etoile {
+    position: absolute;
+    color: white;
+    cursor: pointer;
+
+    animation-name: scintiller;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes scintiller {
+    from {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+#message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 80%;
+    max-width: 400px;
+
+    background: rgba(10, 10, 40, 0.95);
+
+    padding: 35px 45px;
+
+    border-radius: 25px;
+
+    font-size: 22px;
+    line-height: 1.5;
+
+    text-align: center;
+
+    display: none;
+
+    z-index: 10;
+
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+#fermer {
+    position: absolute;
+
+    top: 8px;
+    right: 15px;
+
+    background: none;
+    border: none;
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+.poussiere {
+    position: fixed;
+
+    color: white;
+
+    pointer-events: none;
+
+    font-size: 8px;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 10px rgba(255, 255, 255, 0.9);
+
+    animation: poussiereEtoile 1.2s ease-out forwards;
+
+    z-index: 5;
+}
+
+@keyframes poussiereEtoile {
+
+    from {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform:
+            translate(var(--x), var(--y))
+            scale(0.2);
+    }
+
+}
+
+.etoile-filante {
+    position: fixed;
+
+    color: white;
+    font-size: 20px;
+
+    cursor: pointer;
+
+    z-index: 6;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 10px white,
+        0 0 20px white;
+
+    animation: etoileFilante 4s linear forwards;
+}
+
+/* La traînée derrière l'étoile */
+
+
+@keyframes etoileFilante {
+
+    from {
+        transform: translate(0, 0) rotate(50deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(400px, 400px) rotate(50deg);
+        opacity: 0;
+    }
+
+}
+
+.etoile-speciale {
+    position: absolute;
+
+    color: #ffb7e8;
+
+    font-size: 35px;
+
+    cursor: pointer;
+
+    z-index: 50;
+
+    text-shadow:
+        0 0 8px white,
+        0 0 20px #ffb7e8,
+        0 0 40px #ffb7e8;
+
+    animation: speciale 2s ease-in-out infinite alternate;
+}
+
+@keyframes speciale {
+
+    from {
+        opacity: 0.6;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+
+}
+
+.ligne-constellation {
+    position: absolute;
+
+    height: 3px;
+
+    background: white;
+
+    transform-origin: left center;
+
+    box-shadow:
+        0 0 5px white,
+        0 0 15px white;
+
+    z-index: 20;
+
+    opacity: 1;
+
+    animation: scintillementLigne 2.5s ease-in-out infinite alternate;
+}
+
+
+@keyframes scintillementLigne {
+
+    from {
+        opacity: 0.45;
+        box-shadow:
+            0 0 4px white,
+            0 0 10px white;
+    }
+
+    to {
+        opacity: 1;
+        box-shadow:
+            0 0 7px white,
+            0 0 20px white,
+            0 0 30px #ff6fcf;
+    }
+
+}
+
+.point-coeur {
+    position: absolute;
+
+    color: #ff6fcf;
+
+    font-size: 14px;
+
+    z-index: 25;
+
+    opacity: 0;
+
+    text-shadow:
+        0 0 5px #ff6fcf,
+        0 0 10px #ff4fae,
+        0 0 20px #ff1f8f;
+
+    animation:
+        apparitionEtoile 0.8s ease forwards,
+        scintillementCoeur 1.5s ease-in-out infinite alternate;
+}
+
+
+@keyframes apparitionEtoile {
+
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+@keyframes scintillementCoeur {
+
+    from {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+
+}
+
+/* ========================================
+   ANIMATION DU COEUR
+   ======================================== */
+
+.coeur-animation {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 80;
+
+    pointer-events: none;
+}
+
+
+/* Les étoiles du cœur */
+
+.coeur-animation .point-coeur {
+    pointer-events: none;
+}
+
+
+/* Bouton fermer */
+
+.fermer-coeur {
+    position: fixed;
+
+    top: 30px;
+    right: 30px;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(20, 10, 40, 0.8);
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    z-index: 100;
+
+    pointer-events: auto;
+
+    box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+
+.fermer-coeur:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+
+    .point-coeur {
+        font-size: 12px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .coeur-animation {
+        transform: scale(0.99);
+        transform-origin: center center;
+    }
+
+}
+
+.photo-message {
+    width: 100%;
+
+    max-width: 300px;
+
+    max-height: 400px;
+
+    object-fit: contain;
+
+    border-radius: 15px;
+
+    display: block;
+
+    margin: auto;
+
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.etoile-photo {
+    color: #ffd166;
+
+    text-shadow:
+        0 0 5px #fff3b0,
+        0 0 10px #ffd166,
+        0 0 20px #ffb300,
+        0 0 30px #ff9900;
+}
